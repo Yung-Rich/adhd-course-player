@@ -103,6 +103,8 @@ h1{font-size:1.5rem;font-weight:800;margin:0;letter-spacing:-.01em;text-wrap:bal
 @media (max-width:860px){.grid{grid-template-columns:1fr}}
 .grid.wide{grid-template-columns:minmax(0,1fr)}
 .grid.wide .list{display:none}
+/* Wide mode: size the player so header + video + controls fit one screen (no scrolling), centred with side margins */
+.grid.wide .stage:not(.fs){width:min(100%,calc((100vh - 345px) * 16 / 9));width:min(100%,calc((100dvh - 345px) * 16 / 9));margin:0 auto}
 
 .stage{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);min-width:0}
 .video{position:relative;aspect-ratio:16/9;background:#000;max-width:100%;border-radius:var(--r) var(--r) 0 0;overflow:hidden}
@@ -698,6 +700,7 @@ function onReady(){
     setTimeout(() => toast(`Resumed at ${fmt(V().t)} (15s back)`), 600);
   }
   cueAt(V().t, false);
+  renderList();
   showLast();
   if (!loopStarted) { setInterval(tick, 250); loopStarted = true; }
   renderRecent();
